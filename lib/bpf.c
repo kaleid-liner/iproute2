@@ -1253,8 +1253,9 @@ static int bpf_obj_hash(const char *object, uint8_t *out, size_t len)
 
 	size = sendfile(ofd, ffd, NULL, stbuff.st_size);
 	if (size != stbuff.st_size) {
-		fprintf(stderr, "Error from sendfile (%zd vs %zu bytes): %s\n",
-			size, stbuff.st_size, strerror(errno));
+		/*fprintf(stderr, "Error from sendfile (%zd vs %zu bytes): %s\n",
+			size, stbuff.st_size, strerror(errno));*/
+		fprintf(stderr, "xdp-on-android bug\n");
 		ret = -1;
 		goto out_ffd;
 	}

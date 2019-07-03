@@ -34,6 +34,8 @@ cc_library_shared {
 
     // This is a work around for b/18403920
     ldflags: ["-Wl,--no-gc-sections"],
+
+    static_libs: ["libelf"],
 }
 
 cc_library_shared {

@@ -9,6 +9,20 @@ cc_defaults {
     name: "iproute2_defaults",
 
     header_libs: ["iproute2_headers"],
+    include_dirs: ["external/elfutils/libelf"],
+
+/*
+    target: {
+        android: {
+            cflags: ["-DAndroid"],
+            static_libs: ["libelf"],
+        },
+        host: {
+            shared_libs: ["libelf"],
+        },
+    },
+*/
+    static_libs: ["libz"],
 
     cflags: [
         "-O2",
@@ -19,7 +33,7 @@ cc_defaults {
         "-Wno-sign-compare",
         "-Wno-unused-parameter",
         "-Werror",
-
+	"-DHAVE_ELF",
         "-DHAVE_ERRNO_H",
         "-DHAVE_EXT2_IOCTLS",
         "-DHAVE_GETPAGESIZE",
@@ -46,4 +60,5 @@ cc_defaults {
 
         "-DNO_SHARED_LIBS",
     ],
+
 }

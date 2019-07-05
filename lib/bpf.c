@@ -1216,6 +1216,18 @@ static int bpf_obj_hash(const char *object, uint8_t *out, size_t len)
 		return -EINVAL;
 
 	cfd = socket(AF_ALG, SOCK_SEQPACKET, 0);
+
+        if(cfd == -1){
+            if(errno == EAFNOSUPPORT){
+                //Unavailable, put whatever you want here
+                fprintf(stderr, "#define AF_ALG_UNAVAILABLE\n");
+            } else {
+            //Unable to detect for some other error
+            }
+            } else { //AF_ALG is available
+                fprintf(stderr, "#define AF_ALG_AVAILABLE\n");
+        }
+
 	if (cfd < 0) {
 		fprintf(stderr, "Cannot get AF_ALG socket: %s\n",
 			strerror(errno));
